@@ -1,69 +1,72 @@
 //create user models and schemas
 
 import mongoose from "mongoose";
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
-const userSchema = new Schema ({
-  name:{
-    type:String,
-    required:true
+const userSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
   },
-  username:{
-    type:String,
-    required:true,
-    unique:true
+  password: {
+    type: String,
+    required: true,
   },
-  password:{
-    type:String,
-    required:true
-  }
 });
 
 const contentSchema = new Schema({
-  link:{
-    type:String,
-    required:true
+  link: {
+    type: String,
+    required: true,
   },
-  type:{
-    type:String,
-    enum:["youtube","twitter","other"],
-    required:true
+  type: {
+    type: String,
+    enum: ["youtube", "twitter", "other"],
+    required: true,
   },
-  title:{
+  title: {
     type: String,
     required: true,
   },
   tags: [
     {
-      type: Schema.Types.ObjectId,
-      ref: "Tag",
+      type: String
     },
   ],
   userId: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: "user",
     required: true,
   },
-
-})
-
-const tagSchema = new Schema ({
-  title:{
-    type:String,
-    required:true
+  authorId:{
+    type: Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
   }
 });
 
+const tagSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+});
 
 const linkSchema = new Schema({
-  hash:{
-    type:String
+  hash: {
+    type: String,
   },
-  userId:{
-    type:Schema.Types.ObjectId,
-    ref:"User",
-    required:true
-  }
-})
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+  },
+});
+
+export const userModel = mongoose.model("user", userSchema);
+export const contentModel = mongoose.model("content", contentSchema);
+export const tagModel = mongoose.model("tags", tagSchema);
+export const linkModel = mongoose.model("link", linkSchema);
 
 
