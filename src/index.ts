@@ -102,7 +102,7 @@ async function connectDB() {
   try {
     await mongoose
       .connect(
-        "mongodb+srv://sharmasameep95_db_user:hq01awKFgh6Op6op@cluster0.hhzx1vy.mongodb.net/second-brain",
+        "...",
       )
       .then(() => {
         console.log("DB Connected!");
