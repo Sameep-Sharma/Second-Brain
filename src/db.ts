@@ -31,7 +31,7 @@ const contentSchema = new Schema({
   },
   tags: [
     {
-      type: String
+      type: String,
     },
   ],
   userId: {
@@ -39,11 +39,11 @@ const contentSchema = new Schema({
     ref: "user",
     required: true,
   },
-  authorId:{
+  authorId: {
     type: Schema.Types.ObjectId,
     ref: "user",
     required: true,
-  }
+  },
 });
 
 const tagSchema = new Schema({
@@ -61,6 +61,7 @@ const linkSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "user",
     required: true,
+    unique: true,
   },
 });
 
@@ -68,5 +69,3 @@ export const userModel = mongoose.model("user", userSchema);
 export const contentModel = mongoose.model("content", contentSchema);
 export const tagModel = mongoose.model("tags", tagSchema);
 export const linkModel = mongoose.model("link", linkSchema);
-
-
