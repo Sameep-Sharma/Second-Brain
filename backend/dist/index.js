@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 const app = express();
 import { contentModel, linkModel, userModel } from "./db.js";
-const JWT_PASSWORD = "123123";
 import { userMiddleware } from "./middleware.js";
 import { random } from "./utils.js";
+const JWT_PASSWORD = "123123";
 app.use(express.json());
 app.post("/api/v1/signup", async (req, res) => {
     //TODO : zod validation
@@ -14,10 +14,10 @@ app.post("/api/v1/signup", async (req, res) => {
     //Todo: hash the password
     await userModel.create({
         username: username,
-        password: password
+        password: password,
     });
     res.json({
-        message: "User signUp successfully"
+        message: "User signUp successfully",
     });
 });
 app.post("/api/v1/signin", async (req, res) => {
@@ -25,19 +25,19 @@ app.post("/api/v1/signin", async (req, res) => {
     const password = req.body.password;
     const existingUser = await userModel.findOne({
         username,
-        password
+        password,
     });
     if (existingUser) {
         const token = jwt.sign({
-            _id: existingUser._id
+            _id: existingUser._id,
         }, JWT_PASSWORD);
         res.json({
-            token
+            token,
         });
     }
     else {
         res.status(403).send({
-            message: "Incorrect Credentials"
+            message: "Incorrect Credentials",
         });
     }
 });
@@ -56,18 +56,20 @@ app.post("/api/v1/content", userMiddleware, async (req, res) => {
         title,
         tags,
         userId,
-        authorId
+        authorId,
     });
     res.json({
-        message: "Content Added"
+        message: "Content Added",
     });
 });
 app.get("/api/v1/content", userMiddleware, async (req, res) => {
     // @ts-ignore
     const userId = req.userId;
-    const content = await contentModel.find({ userId }).populate("userId", "username");
+    const content = await contentModel
+        .find({ userId })
+        .populate("userId", "username");
     res.json({
-        content
+        content,
     });
 });
 app.delete("/api/v1/content", userMiddleware, async (req, res) => {
@@ -75,10 +77,10 @@ app.delete("/api/v1/content", userMiddleware, async (req, res) => {
     await contentModel.findOneAndDelete({
         contentId,
         //@ts-ignore
-        userId: req.userId
+        userId: req.userId,
     });
     res.json({
-        message: "Content Deleted"
+        message: "Content Deleted",
     });
 });
 app.post("/api/v1/brain/share", userMiddleware, async (req, res) => {

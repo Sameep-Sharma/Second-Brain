@@ -5,3 +5,7 @@
   --color-secondary_purple:#3e38a7;
   --color-tertiary_purple:#e0e7fe;
 }
+
+.tweet-scale {
+  zoom: 0.6;
+}
