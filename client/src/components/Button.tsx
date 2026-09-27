@@ -9,9 +9,11 @@ export interface ButtonProps {
   onClick?: () => void;
   animation?: "default" | "none" | "glaze";
   submit: "yes" | "no"
+  fullWidth?:boolean;
+  loading?:boolean
 }
 
-const defaultStyles = "rounded-md p-4 flex items-center  cursor-pointer";
+const defaultStyles = "rounded-md p-4 flex items-center  cursor-pointer disabled:cursor-not-allowed disabled:opacity-50";
 
 const variantStyles = {
   primary: "bg-primary_purple text-white",
@@ -38,8 +40,7 @@ const animationStyles = {
 export const Button = (props: ButtonProps) => {
   return (
     <button
-      className={`${variantStyles[props.variant]} ${defaultStyles} ${variantSizes[props.size]} ${animationStyles[props.animation ?? "default"]} ${submitStyle[props.submit] }`} onClick={props.onClick}
-    >
+      className={`${variantStyles[props.variant]} ${defaultStyles} ${props.fullWidth ? "w-full flex justify-center" : ""} ${variantSizes[props.size]} ${animationStyles[props.animation ?? "default"]} ${submitStyle[props.submit] }` } disabled={props.loading} onClick={props.onClick}>
       {props.startIcon ? <div className="pr-2">{props.startIcon}</div> : null}{" "}
       {props.text} {props.endIcon}
     </button>

@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
-
+import cors from "cors"
 const app = express();
 
 import { contentModel, linkModel, userModel } from "./db.js";
@@ -9,6 +9,12 @@ import { userMiddleware } from "./middleware.js";
 import { random } from "./utils.js";
 
 const JWT_PASSWORD = "123123";
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
 app.use(express.json());
 

@@ -1,3 +1,4 @@
+import { DeleteIcon } from "../icons/DeleteIcon";
 import { ShareIcon } from "../icons/ShareIcon";
 import { Tweet } from "react-tweet";
 
@@ -8,26 +9,35 @@ interface CardProps {
 }
 
 function getYouTubeEmbedUrl(link: string) {
-  const url = new URL(link);
+  try {
+    const url = new URL(link);
 
-  if (url.hostname === "youtu.be") {
-    const videoId = url.pathname.slice(1);
-    return `https://www.youtube.com/embed/${videoId}`;
+    if (url.hostname === "youtu.be") {
+      const videoId = url.pathname.slice(1);
+      return videoId
+        ? `https://www.youtube.com/embed/${videoId}`
+        : null;
+    }
+
+    if (url.hostname.includes("youtube.com")) {
+      const videoId = url.searchParams.get("v");
+
+      return videoId
+        ? `https://www.youtube.com/embed/${videoId}`
+        : null;
+    }
+
+    return null;
+  } catch {
+    return null;
   }
-
-  if (url.hostname.includes("youtube.com")) {
-    const videoId = url.searchParams.get("v");
-    return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
-  }
-
-  return null;
 }
 
 export const Card = ({ title, link, type }: CardProps) => {
   const embedUrl = getYouTubeEmbedUrl(link);
 
   return (
-    <div className="w-95">
+    <div className="w-full min-w-0">
       <div className="border-slate-200 p-4 bg-white rounded-md border-2">
         {/* Header */}
         <div className="flex justify-between items-center">
@@ -46,7 +56,7 @@ export const Card = ({ title, link, type }: CardProps) => {
             </div>
 
             <div className="pr-2 text-gray-500">
-              <ShareIcon />
+              <DeleteIcon />
             </div>
           </div>
         </div>
