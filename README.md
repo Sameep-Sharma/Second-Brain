@@ -1,0 +1,2 @@
+## Building a Second Brain App
+#### This project is a personal knowledge management application designed to help users organize and retrieve information efficiently. The app allows users to create notes, categorize them, and link related concepts together, forming a "second brain" for better knowledge retention and accessibility.
