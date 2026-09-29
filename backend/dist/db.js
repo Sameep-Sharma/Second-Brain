@@ -41,6 +41,10 @@ const contentSchema = new Schema({
         ref: "user",
         required: true,
     },
+    contentId: {
+        type: String,
+        unique: true
+    }
 });
 const tagSchema = new Schema({
     title: {

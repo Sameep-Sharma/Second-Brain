@@ -64,6 +64,7 @@ app.post("/api/v1/content", userMiddleware, async (req, res) => {
   const type = req.body.type;
   const title = req.body.title;
   const tags = req.body.tags;
+  const contentId =random(10)
   // @ts-ignore
   const userId = req.userId;
   // @ts-ignore
@@ -76,6 +77,7 @@ app.post("/api/v1/content", userMiddleware, async (req, res) => {
     tags,
     userId,
     authorId,
+    contentId
   });
 
   res.json({

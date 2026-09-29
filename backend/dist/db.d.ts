@@ -57,6 +57,7 @@ export declare const contentModel: mongoose.Model<{
     tags: string[];
     userId: mongoose.Types.ObjectId;
     authorId: mongoose.Types.ObjectId;
+    contentId?: string | null;
 }, {}, {}, {
     id: string;
 }, mongoose.Document<unknown, {}, {
@@ -66,6 +67,7 @@ export declare const contentModel: mongoose.Model<{
     tags: string[];
     userId: mongoose.Types.ObjectId;
     authorId: mongoose.Types.ObjectId;
+    contentId?: string | null;
 }, {
     id: string;
 }, mongoose.DefaultSchemaOptions> & Omit<{
@@ -75,6 +77,7 @@ export declare const contentModel: mongoose.Model<{
     tags: string[];
     userId: mongoose.Types.ObjectId;
     authorId: mongoose.Types.ObjectId;
+    contentId?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -88,6 +91,7 @@ export declare const contentModel: mongoose.Model<{
     tags: string[];
     userId: mongoose.Types.ObjectId;
     authorId: mongoose.Types.ObjectId;
+    contentId?: string | null;
 }, mongoose.Document<unknown, {}, {
     link: string;
     type: "other" | "twitter" | "youtube";
@@ -95,6 +99,7 @@ export declare const contentModel: mongoose.Model<{
     tags: string[];
     userId: mongoose.Types.ObjectId;
     authorId: mongoose.Types.ObjectId;
+    contentId?: string | null;
 }, {
     id: string;
 }, mongoose.DefaultSchemaOptions> & Omit<{
@@ -104,6 +109,7 @@ export declare const contentModel: mongoose.Model<{
     tags: string[];
     userId: mongoose.Types.ObjectId;
     authorId: mongoose.Types.ObjectId;
+    contentId?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -117,6 +123,7 @@ export declare const contentModel: mongoose.Model<{
     tags: string[];
     userId: mongoose.Types.ObjectId;
     authorId: mongoose.Types.ObjectId;
+    contentId?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -128,6 +135,7 @@ export declare const contentModel: mongoose.Model<{
     tags: string[];
     userId: mongoose.Types.ObjectId;
     authorId: mongoose.Types.ObjectId;
+    contentId?: string | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {

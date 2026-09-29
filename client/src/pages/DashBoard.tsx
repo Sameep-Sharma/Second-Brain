@@ -11,7 +11,7 @@ import { BACKEND_URL } from "../config";
 
 function DashBoard() {
   const [modalOpen, setModalOpen] = useState(false);
-  const {contents, refresh} = useContent();
+  const {contents, refresh, handleDelete} = useContent();
 
   useEffect(()=>{
     refresh()
@@ -38,7 +38,7 @@ function DashBoard() {
                   "Authorization":localStorage.getItem("token")
                 }
               })
-              const shareUrl = `${BACKEND_URL}/api/brain/${response.data.message}`
+              const shareUrl = `${window.location.origin}${response.data.message}`;
               alert(shareUrl)
             }}
             startIcon={<ShareIcon />}
@@ -59,15 +59,15 @@ function DashBoard() {
             submit="no"
           />
         </div>
-
-        {/* Content grid */}
         <div className="flex gap-4 p-2 flex-wrap">
-          {contents.map(({ _id, type, link, title }) => (
-            <div key={_id} className="min-w-0">
+          {contents.map(({  type, link, title,contentId }) => (
+            <div key={contentId} className="min-w-0">
               <Card
+                contentId={contentId}
                 type={type}
                 link={link}
                 title={title}
+                onDelete={handleDelete}
               />
             </div>
           ))}

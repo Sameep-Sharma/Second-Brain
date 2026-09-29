@@ -1,11 +1,15 @@
+
 import { DeleteIcon } from "../icons/DeleteIcon";
 import { ShareIcon } from "../icons/ShareIcon";
 import { Tweet } from "react-tweet";
 
+
 interface CardProps {
+  contentId:string
   title: string;
   link: string;
   type: "twitter" | "youtube";
+  onDelete: (id:string) => void
 }
 
 function getYouTubeEmbedUrl(link: string) {
@@ -14,17 +18,13 @@ function getYouTubeEmbedUrl(link: string) {
 
     if (url.hostname === "youtu.be") {
       const videoId = url.pathname.slice(1);
-      return videoId
-        ? `https://www.youtube.com/embed/${videoId}`
-        : null;
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
     }
 
     if (url.hostname.includes("youtube.com")) {
       const videoId = url.searchParams.get("v");
 
-      return videoId
-        ? `https://www.youtube.com/embed/${videoId}`
-        : null;
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
     }
 
     return null;
@@ -33,7 +33,7 @@ function getYouTubeEmbedUrl(link: string) {
   }
 }
 
-export const Card = ({ title, link, type }: CardProps) => {
+export const Card = ({  title, link, type,onDelete,contentId }: CardProps) => {
   const embedUrl = getYouTubeEmbedUrl(link);
 
   return (
@@ -55,7 +55,12 @@ export const Card = ({ title, link, type }: CardProps) => {
               </a>
             </div>
 
-            <div className="pr-2 text-gray-500">
+            <div
+              className="pr-2 text-gray-500 cursor-pointer"
+              onClick={() => {
+               onDelete(contentId)
+              }}
+            >
               <DeleteIcon />
             </div>
           </div>
